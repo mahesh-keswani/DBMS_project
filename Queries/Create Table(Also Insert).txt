@@ -1,0 +1,81 @@
+CREATE TABLE customer
+(
+	cust_id VARCHAR(10) PRIMARY KEY,
+	cust_name varchar(30) not nulL, check(cust_name not like '%[0-9]'),
+	cust_add varchar(100) not null,
+	phone numeric(12),
+	cust_car_id VARCHAR(10) foreign key references car(car_id),
+);
+
+CREATE TABLE dealer
+(
+	dealer_id VARCHAR(10) primary key,
+	deal_name varchar(20) not null,check(deal_name not like '%[0-9]'),
+	deal_add varchar(100),
+	deal_phone numeric(12)
+);
+
+CREATE TABLE car
+(
+	car_id varchar(10) PRIMARY KEY,
+	price int not null,
+	car_type varchar(15) not null,
+	colour varchar(15) not null,
+	deal_id varchar(10) foreign key references dealer(dealer_id),
+	br_id varchar(10) foreign key references brand(brand_id),
+	m_id varchar(10) foreign key references model(model_id)
+);
+
+
+CREATE TABLE brand
+(
+	brand_id varchar(10) primary key,
+	brand_name varchar(20) not null,
+);
+
+CREATE TABLE model
+(
+	model_id varchar(10) primary key,
+	model_name varchar(20),
+	br_id varchar(10) foreign key references brand(brand_id)
+);
+
+CREATE TABLE services
+(
+	service_id varchar(10) primary key,
+	ser_car_id varchar(10) foreign key references car(car_id),
+	ser_cust_id varchar(10) foreign key references customer(cust_id),
+	date_recieved date not null
+);
+
+SELECT * FROM customer;
+SELECT * FROM services;
+SELECT * FROM brand;
+SELECT * FROM model;
+SELECT * FROM car;
+SELECT * FROM dealer;
+
+INSERT INTO customer VALUES();
+INSERT INTO services VALUES();
+INSERT INTO brand VALUES();
+INSERT INTO model VALUES();
+INSERT INTO car VALUES();
+INSERT INTO dealer VALUES();
+
+INSERT INTO dealer VALUES('123','John Doe','Address 101',9876543210);
+INSERT INTO dealer VALUES('124','Rahul Kanwal','Forest 123',9876543211);
+INSERT INTO dealer VALUES('125','Mahesh Keswani','Green Land',8796541230);
+INSERT INTO dealer VALUES('126','Aakash Barhate','Dell End',8879543210);
+
+INSERT INTO brand VALUES('TA','Tata');
+INSERT INTO brand VALUES('TOY','Toyota');
+INSERT INTO brand VALUES('AU','Audi');
+INSERT INTO brand VALUES('MAh','Mahindra');
+
+INSERT INTO model VALUES('TA_AR','Aria','TA');
+
+INSERT INTO car VALUES('CAR001',500000,'SUV','Blue','123','TA','TA_AR');
+
+INSERT INTO customer VALUES('1','Butters Stotch','Adderss 51',1234567890,'CAR001');
+
+INSERT INTO services VALUES('S001','CAR001','1','10-10-2018');

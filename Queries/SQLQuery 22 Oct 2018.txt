@@ -1,0 +1,41 @@
+SELECT * FROM customer;
+SELECT * FROM car;
+SELECT * FROM brand;
+SELECT * FROM model;
+SELECT * FROM services;
+SELECT * FROM dealer;
+SELECT * FROM employee;
+SELECT * FROM carinfo;
+
+create trigger esalary on employee for update 
+as
+begin
+if((select salary from inserted)<=2500)
+begin
+ print 'Successful updation'
+        commit
+        end
+         else
+        begin
+          print 'salary should be less than 2500'
+             rollback;             
+          
+		  
+		  end
+          
+          end
+          
+          update employee set salary=30000 where ssn =8;
+
+update employee set salary = 20000 where ssn = 8;
+
+SELECT * FROM dealer inner join car on dealer_id=deal_id;
+
+SELECT * FROM carinfo WHERE price BETWEEN 100000 AND 400000;
+
+SELECT * FROM carinfo WHERE price NOT BETWEEN 250000 AND 400000;
+
+SELECT * FROM carinfo WHERE m_id = (SELECT model_id FROM model WHERE model_name LIKE 'A%');
+
+SELECT car_type,price,colour FROM car WHERE m_id = (SELECT model_id FROM model WHERE model_name LIKE 'A%');
+

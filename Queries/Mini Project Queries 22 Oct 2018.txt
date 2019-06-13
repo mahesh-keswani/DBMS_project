@@ -1,0 +1,12 @@
+//Dealer and Car Details
+SELECT * FROM dealer inner join car on dealer_id=deal_id;
+
+
+//Car between prices
+SELECT * FROM carinfo WHERE price BETWEEN 100000 AND 400000;
+
+//Car not between prices
+SELECT * FROM carinfo WHERE price NOT BETWEEN 250000 AND 400000;
+
+//Car details whose model name starts from "A"
+SELECT car_type,price,colour FROM car WHERE m_id = (SELECT model_id FROM model WHERE model_name LIKE 'A%');

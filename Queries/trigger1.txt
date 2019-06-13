@@ -1,0 +1,20 @@
+//TRIGGER
+CREATE TRIGGER pricetrigger ON car FOR UPDATE 
+AS
+BEGIN
+IF((SELECT price FROM inserted)>1000)
+BEGIN
+ print 'Successful Updation'
+        COMMIT
+        END
+         ELSE
+        BEGIN
+          PRINT 'Price should be more than 1000'
+             ROLLBACK;             
+		  
+		  END
+          
+          END
+          
+          
+UPDATE car SET price=100 WHERE car_id='CAR002';
